@@ -19,23 +19,23 @@ import java.util.UUID;
 @RestController
 public class ProductController {
 
-    @Autowired // para utilizar todos os métodos da classe repository
+    @Autowired
     ProductRepository productRepository;
 
 
-    @PostMapping("/products") // MÉTODO POST SERVE PARA SALVAR RECURSOS NO BANCO DE DADOS
+    @PostMapping("/products")
     public ResponseEntity<ProductModel> saveProduct(@RequestBody @Valid ProductRecordDTO productRecordDto){
         var productModel = new ProductModel();
         BeanUtils.copyProperties(productRecordDto, productModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(productModel));
     }
 
-    @GetMapping("/products") // retorna todos os registros da
+    @GetMapping("/products")
     public ResponseEntity<List<ProductModel>> getAllProducts(){
         return ResponseEntity.status(HttpStatus.OK).body(productRepository.findAll());
     }
 
-    @GetMapping("/products/{id}") // RETORNA UM REGISTRO PELO ID
+    @GetMapping("/products/{id}")
     public ResponseEntity<Object> getOneProduct(@PathVariable(value = "id") UUID id){
         Optional<ProductModel> product0 = productRepository.findById(id);
         if(product0.isEmpty()){
@@ -45,7 +45,7 @@ public class ProductController {
     }
 
 
-    @PutMapping("/products/{id}") // ATUALIZA (UPDATE) REGISTROS QUE JÁ FORAM INSERIDOS NA TABELA (PELO ID)
+    @PutMapping("/products/{id}")
     public ResponseEntity<Object> updateProduct(@PathVariable(value = "id") UUID id,
                                                 @RequestBody @Valid ProductRecordDTO productRecordDTO){
         Optional<ProductModel> product0 = productRepository.findById(id);

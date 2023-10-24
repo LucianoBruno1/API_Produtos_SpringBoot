@@ -13,10 +13,10 @@ public class ProductModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    //CRIAANDO OS ATRIBUTOS DA TABELA (COLUNAS)
 
-    @Id // Identificador único de uma colina (chave primária)
-    @GeneratedValue(strategy = GenerationType.AUTO) // Forma de geração do valor da coluna (neste caso, automática)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idProduct;
     private String name;
     private BigDecimal value;
